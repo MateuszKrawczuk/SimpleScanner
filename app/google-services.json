@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "313243469638",
+    "firebase_url": "https://simple-qr-scanner.firebaseio.com",
+    "project_id": "simple-qr-scanner",
+    "storage_bucket": "simple-qr-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313243469638:android:58a5e479d9e9bdbab6c747",
+        "android_client_info": {
+          "package_name": "pl.mateuszkrawczuk.simplescanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313243469638-qbhgj3h3hr6jk6s7k6a0ksc980v9645h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.mateuszkrawczuk.simplescanner",
+            "certificate_hash": "550e35a57afb7d3cf7d81aef4210b55d30797449"
+          }
+        },
+        {
+          "client_id": "313243469638-6uash1hi3kl7mivnssrcebpcohju7ibd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHiC2pvXhjnrWMc2D7NEsZhb5umaIA6_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313243469638-6uash1hi3kl7mivnssrcebpcohju7ibd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
