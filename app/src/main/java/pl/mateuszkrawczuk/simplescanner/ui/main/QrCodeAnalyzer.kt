@@ -3,14 +3,14 @@ package pl.mateuszkrawczuk.simplescanner.ui.main
 import android.annotation.SuppressLint
 import android.util.Base64
 import android.util.Log
+import android.view.Surface.ROTATION_0
 import android.widget.TextView
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions
-import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
 
 
 class QrCodeAnalyzer(message: TextView) : ImageAnalysis.Analyzer {
@@ -21,29 +21,28 @@ class QrCodeAnalyzer(message: TextView) : ImageAnalysis.Analyzer {
     override fun analyze(proxy_img: ImageProxy) {
         val mediaImage = proxy_img.image
         if (mediaImage != null) {
-            val image = FirebaseVisionImage.fromMediaImage(
+            val image = InputImage.fromMediaImage(
                 mediaImage,
-                FirebaseVisionImageMetadata.ROTATION_0
+                ROTATION_0
             )
 
-            val options = FirebaseVisionBarcodeDetectorOptions.Builder()
+            val options = BarcodeScannerOptions.Builder()
                 .setBarcodeFormats(
-                    FirebaseVisionBarcode.FORMAT_DATA_MATRIX,
-                    FirebaseVisionBarcode.FORMAT_QR_CODE,
-                    FirebaseVisionBarcode.FORMAT_CODABAR
+                    Barcode.FORMAT_DATA_MATRIX,
+                    Barcode.FORMAT_QR_CODE,
+                    Barcode.FORMAT_CODABAR
                 )
                 .build()
 
-            val detector = FirebaseVision.getInstance()
-                .getVisionBarcodeDetector(options)
+            val detector = BarcodeScanning.getClient(options)
 
-            detector.detectInImage(image)
+            detector.process(image)
                 .addOnSuccessListener { barcodes ->
                     for (barcode in barcodes) {
                         val valueType = barcode.valueType
                         // See API reference for complete list of supported types
                         when (valueType) {
-                            FirebaseVisionBarcode.TYPE_TEXT -> {
+                            Barcode.TYPE_TEXT -> {
                                 val value = byteArrayToHexLineString(
                                     Base64.decode(barcode.rawValue, Base64.DEFAULT)
                                 )

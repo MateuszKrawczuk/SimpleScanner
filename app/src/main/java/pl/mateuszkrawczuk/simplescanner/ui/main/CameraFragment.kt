@@ -59,7 +59,7 @@ class CameraFragment : Fragment() {
             .setTargetName("Preview")
             .build()
 
-        preview.setSurfaceProvider(preview_view.previewSurfaceProvider)
+        preview.setSurfaceProvider(preview_view.surfaceProvider)
 
         val cameraSelector: CameraSelector = CameraSelector.Builder()
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
